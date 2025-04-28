@@ -1,0 +1,55 @@
+#DFS(non-recursive)
+
+def dfs_iterative(graph, start):
+    stack = [start]
+    visited = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            print(node)
+            visited.append(node)
+            # Push neighbors to stack (important: reverse to match recursive DFS order)
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+# Example graph (adjacency list)
+g = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [3, 0],
+    3: [2, 1, 4],
+    4: [3, 1]
+}
+
+dfs_iterative(g, 0)
+
+
+#BFS(non-recursive)
+
+
+def bfs_iterative(graph, start):
+    from collections import deque
+
+    queue = deque([start])
+    visited = [start]
+
+    while queue:
+        node = queue.popleft()
+        print(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.append(neighbor)
+                queue.append(neighbor)
+
+# Example graph (same as above)
+g = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [3, 0],
+    3: [2, 1, 4],
+    4: [3, 1]
+}
+
+bfs_iterative(g, 0)
